@@ -2,6 +2,9 @@
 
 An expandable SwiftUI hour picker for positive and negative hours.
 
+
+<img src="https://github.com/AlmightyBeaver/HourPicker/blob/main/example1_small.png" width="293" height="633">
+
  
 ### Example
  ```
