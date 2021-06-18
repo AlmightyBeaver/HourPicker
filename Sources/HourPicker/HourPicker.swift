@@ -140,7 +140,6 @@ public struct HourPicker: View {
                     multiPicker
                 }
             }
-            .animation(.spring())
         }
         
         .onChange(of: self.hoursExternal, perform: { _ in
