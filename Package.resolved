@@ -1,0 +1,16 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "MultiPicker",
+        "repositoryURL": "https://github.com/AlmightyBeaver/MultiPicker.git",
+        "state": {
+          "branch": null,
+          "revision": "90d07c2bd8bdfeaa80c42303f24f7aafb7e7b110",
+          "version": "1.0.1"
+        }
+      }
+    ]
+  },
+  "version": 1
+}
