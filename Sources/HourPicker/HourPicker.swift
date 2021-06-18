@@ -95,12 +95,12 @@ public struct HourPicker: View {
     ///   - maxHours: Maximum selectable hour
     ///   - isSignPickerVisible: Indicator if the picker for the sign selection is visible
     ///   - isDecimalTimeFormatUsed: Indicator if decimal time format (e.g. 2.5h instead of 2h 30min ) is used
-    init(hours: Binding<Double>,
-         title: LocalizedStringKey,
-         captionTitle: LocalizedStringKey,
-         maxHours: Int = 23,
-         isSignPickerVisible: Bool = true,
-         isDecimalTimeFormatUsed: Bool) {
+    public init(hours: Binding<Double>,
+                title: LocalizedStringKey,
+                captionTitle: LocalizedStringKey,
+                maxHours: Int = 23,
+                isSignPickerVisible: Bool = true,
+                isDecimalTimeFormatUsed: Bool) {
         self.isTitleViewVisible = true
         self.title = title
         self.captionTitle = captionTitle
@@ -189,7 +189,7 @@ public struct HourPicker: View {
     }
     
     // The MultiPicker component to select the hours
-    var multiPicker: MultiPicker{
+    private var multiPicker: MultiPicker{
         if self.isSignPickerVisible{
             return MultiPicker(selection1: self.$selectedSignIndex,
                                selection2: self.$selectedHourIndex,
