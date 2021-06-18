@@ -7,6 +7,7 @@
 
 import Foundation
 
+#if os(iOS)
 extension HourPicker{
     internal struct HourTimeManager{
         
@@ -72,3 +73,4 @@ extension HourPicker{
         }
     }
 }
+#endif
