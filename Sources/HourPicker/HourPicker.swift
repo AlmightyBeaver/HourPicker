@@ -33,6 +33,7 @@ import MultiPicker
 ///                        title: "Title",
 ///                        captionTitle: "Caption text here",
 ///                        maxHours: 30,
+///                        isSignPickerVisible: true,
 ///                        isDecimalTimeFormatUsed: isDecimalTimeFormatUsed)
 ///             Text("Value: \(hours)")
 ///         }
@@ -48,6 +49,8 @@ public struct HourPicker: View {
     private var isTitleViewVisible: Bool
     /// Indicator if decimal time format (e.g. 2.5h instead of 2h 30min ) is used
     private var isDecimalTimeFormatUsed: Bool
+    /// Indicator if the picker for the sign selection is visible
+    private var isSignPickerVisible: Bool
     
     
     /// Maximum selectable hour
@@ -90,11 +93,13 @@ public struct HourPicker: View {
     ///   - title: The title
     ///   - captionTitle: The caption
     ///   - maxHours: Maximum selectable hour
+    ///   - isSignPickerVisible: Indicator if the picker for the sign selection is visible
     ///   - isDecimalTimeFormatUsed: Indicator if decimal time format (e.g. 2.5h instead of 2h 30min ) is used
     init(hours: Binding<Double>,
          title: LocalizedStringKey,
          captionTitle: LocalizedStringKey,
          maxHours: Int = 23,
+         isSignPickerVisible: Bool = true,
          isDecimalTimeFormatUsed: Bool) {
         self.isTitleViewVisible = true
         self.title = title
@@ -103,6 +108,7 @@ public struct HourPicker: View {
         self.hourValues = Array(0...maxHours)
         let timeStep = 1
         self.minuteValues = Array(stride(from: 0, through: 59, by: timeStep))
+        self.isSignPickerVisible = isSignPickerVisible
         self.isDecimalTimeFormatUsed = isDecimalTimeFormatUsed
         
         self._hoursExternal = hours
@@ -184,15 +190,23 @@ public struct HourPicker: View {
     
     // The MultiPicker component to select the hours
     var multiPicker: MultiPicker{
-        MultiPicker(selection1: self.$selectedSignIndex,
-                    selection2: self.$selectedHourIndex,
-                    selection3: self.$selectedMinuteIndex,
-                    values1: self.signValues,
-                    values2: self.hourValues,
-                    values3: self.minuteValues,
-                    values2Suffix: "h",
-                    values3Suffix: "m",
-                    middleText2: ":")
+        if self.isSignPickerVisible{
+            return MultiPicker(selection1: self.$selectedSignIndex,
+                               selection2: self.$selectedHourIndex,
+                               selection3: self.$selectedMinuteIndex,
+                               values1: self.signValues,
+                               values2: self.hourValues,
+                               values3: self.minuteValues,
+                               values2Suffix: "h",
+                               values3Suffix: "m")
+        }else{
+            return MultiPicker(selection1: self.$selectedHourIndex,
+                               selection2: self.$selectedMinuteIndex,
+                               values1: self.hourValues,
+                               values2: self.minuteValues,
+                               values1Suffix: "h",
+                               values2Suffix: "m")
+        }
     }
     
 }
@@ -294,12 +308,20 @@ internal struct HourPicker_Previews: PreviewProvider {
                        title: "Title",
                        captionTitle: "Caption text",
                        maxHours: 30,
+                       isSignPickerVisible: true,
                        isDecimalTimeFormatUsed: false)
+            HourPicker(hours: .constant(-25.4),
+                       title: "Title",
+                       captionTitle: "Caption text",
+                       maxHours: 30,
+                       isSignPickerVisible: true,
+                       isDecimalTimeFormatUsed: true)
             HourPicker(hours: .constant(25.4),
                        title: "Title",
                        captionTitle: "Caption text",
                        maxHours: 30,
-                       isDecimalTimeFormatUsed: true)
+                       isSignPickerVisible: false,
+                       isDecimalTimeFormatUsed: false)
         }
     }
 }

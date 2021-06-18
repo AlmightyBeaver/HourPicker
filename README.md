@@ -28,6 +28,7 @@ An expandable SwiftUI hour picker for positive and negative hours.
                         title: "Title",
                         captionTitle: "Caption text here",
                         maxHours: 30,
+                        isSignPickerVisible: true,
                         isDecimalTimeFormatUsed: isDecimalTimeFormatUsed)
              Text("Value: \(hours)")
          }
