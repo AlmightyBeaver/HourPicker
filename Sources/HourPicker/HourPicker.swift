@@ -45,7 +45,7 @@ public struct HourPicker: View {
     typealias TM = HourPicker.HourTimeManager
     /// The height of the HourPicker view
     private(set) var height: CGFloat = 200
-    /// Indicator if the title view is visible
+    /// Indicator if the title view is visible. If not, just the picker is shown.
     private var isTitleViewVisible: Bool
     /// Indicator if decimal time format (e.g. 2.5h instead of 2h 30min ) is used
     private var isDecimalTimeFormatUsed: Bool
@@ -95,13 +95,15 @@ public struct HourPicker: View {
     ///   - maxHours: Maximum selectable hour
     ///   - isSignPickerVisible: Indicator if the picker for the sign selection is visible
     ///   - isDecimalTimeFormatUsed: Indicator if decimal time format (e.g. 2.5h instead of 2h 30min ) is used
+    ///   - isTitleViewVisible: Indicator if the title view is visible. If not, just the picker is shown.
     public init(hours: Binding<Double>,
                 title: LocalizedStringKey,
                 captionTitle: LocalizedStringKey,
                 maxHours: Int = 23,
                 isSignPickerVisible: Bool = true,
-                isDecimalTimeFormatUsed: Bool) {
-        self.isTitleViewVisible = true
+                isDecimalTimeFormatUsed: Bool,
+                isTitleViewVisible: Bool = true) {
+        self.isTitleViewVisible = isTitleViewVisible
         self.title = title
         self.captionTitle = captionTitle
         self.maxHours = maxHours
