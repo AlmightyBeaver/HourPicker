@@ -267,13 +267,21 @@ extension HourPicker{
         var captionText: LocalizedStringKey
         
         var body: some View {
-            VStack {
+            if captionText == ""{
                 HStack {
                     Text(titleText)
                         .foregroundColor(.primary)
                     Spacer()
                 }
-                HourPicker.CaptionTextView(captionText: captionText)
+            }else {
+                VStack {
+                    HStack {
+                        Text(titleText)
+                            .foregroundColor(.primary)
+                        Spacer()
+                    }
+                    HourPicker.CaptionTextView(captionText: captionText)
+                }
             }
         }
     }
